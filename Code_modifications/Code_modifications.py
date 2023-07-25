@@ -11,19 +11,20 @@ print(basic_model)
 
 
 decision_variables= basic_model.addVars([x for x in range(1,7)],vtype =GRB.CONTINUOUS,name ="Decsion Variables")
-# list_of_names =['DV1','DV2','DV3','DV4','DV5','DV6']
-# decision_variables = [basic_model.addVars(x,vtype =GRB.CONTINUOUS,name =list_of_names[x-1]) for x in range(1,7)]
-#update the model to include the variable
 basic_model.update()
 
 #objective functions
-basic_model.setObjective(0.0865*basic_model.getVars()[0]\
-                        + 0.0952*basic_model.getVars()[1] \
-                        + .10*basic_model.getVars()[2] +\
-                        0.0875*basic_model.getVars()[3] \
-                        +0.0925*basic_model.getVars()[4]\
-                        +0.09*basic_model.getVars()[5],\
-                        GRB.MAXIMIZE)
+# basic_model.setObjective(0.0865*basic_model.getVars()[0]\
+#                         + 0.0952*basic_model.getVars()[1] \
+#                         + .10*basic_model.getVars()[2] +\
+#                         0.0875*basic_model.getVars()[3] \
+#                         +0.0925*basic_model.getVars()[4]\
+#                         +0.09*basic_model.getVars()[5],\
+#                         GRB.MAXIMIZE)
+
+#another way to write the objective function is 
+weights =[.0865,.0952,.10,.0875,.0925,.09]
+basic_model.setObjective(gp.quicksum((a*b )for a,b in zip(weights,basic_model.getVars())),GRB.MAXIMIZE)
 
 
 
