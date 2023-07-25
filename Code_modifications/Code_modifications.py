@@ -11,7 +11,8 @@ print(basic_model)
 
 
 decision_variables= basic_model.addVars([x for x in range(1,7)],vtype =GRB.CONTINUOUS,name ="Decsion Variables")
-# decision_variables = [basic_model.addVar(x,vtype =GRB.CONTINUOUS,name ="Decsion Variables") for x in range(1,7)]
+# list_of_names =['DV1','DV2','DV3','DV4','DV5','DV6']
+# decision_variables = [basic_model.addVars(x,vtype =GRB.CONTINUOUS,name =list_of_names[x-1]) for x in range(1,7)]
 #update the model to include the variable
 basic_model.update()
 
@@ -24,7 +25,6 @@ basic_model.setObjective(0.0865*basic_model.getVars()[0]\
                         +0.09*basic_model.getVars()[5],\
                         GRB.MAXIMIZE)
 
-basic_model.write("testing.lp")
 
 
 # fourth step Add constraints 
@@ -41,34 +41,32 @@ basic_model.addConstr(gp.quicksum(basic_model.getVars()) == 750000,"total invest
 # basic_model.addConstr(X5 <= 187500,"25percent for decision variable 5")
 # basic_model.addConstr(X6 <= 187500,"25percent for decision variable 6")
 
-# basic_model.addConstrs([x for x in basic_model.getVars()]<= 187500,"25percent for decision variable 6")
-basic_model.addConstrs(decision_variables[x] <= 187500 for x in range(0,6))
-
-# basic_model.write("testing.lp")
-
+basic_model.addConstrs(x <=187500  for x in basic_model.getVars())
+basic_model.write("testing.lp")
 
 """third constraint"""
 # basic_model.addConstr(X1 + X2  +X4  +X6  >= 375000,"Long Investment")
-
 basic_model.addConstr(basic_model.getVars()[0] +\
                         basic_model.getVars()[1] +\
                         basic_model.getVars()[2] + basic_model.getVars()[5] \
                          >= 375000,"Long Investment")
 
-# basic_model.write("testing.lp")
 """fourth constraint"""
 # basic_model.addConstr(X2 +X3  +X5  <= 262500,"High Risk Investment")
-basic_model.addConstr(basic_model.getVars()[1] +basic_model.getVars()[2]  +basic_model.getVars()[4]  <= 262500,"High Risk Investment")
+basic_model.addConstr(basic_model.getVars()[1] +\
+                      basic_model.getVars()[2]  +\
+                    basic_model.getVars()[4]  \
+                        <= 262500,"High Risk Investment")
 
 
 # write the linear programming equation
-basic_model.write('Investment_problem_Advanced.lp')
+basic_model.write('code_modification.lp')
 
 # optimise the solution
 basic_model.optimize()
 
 # write the solution to .sol file
-basic_model.write("Investment_problem_Advanced.sol")
+basic_model.write("code_modifications.sol")
 
 
 basic_model
