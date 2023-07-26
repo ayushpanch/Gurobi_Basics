@@ -1,0 +1,7 @@
+# Solution for model basic_model
+# Objective value = 2.9836363636363633e-01
+A 2.1818181818181812e+00
+B 0
+C 7.3636363636363651e+00
+D 0
+E 4.5454545454545370e-01
