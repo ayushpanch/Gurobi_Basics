@@ -24,15 +24,14 @@ basic_model.update()
 # third step setting up the objective functions 
 bad_debts=df['Probability_of_Bad_Debt '].tolist()
 Interest_Rate=df['Interrest_Rate'].tolist()
-
+obj_weights = [0.026,.0509,.0864,.068,.078]
 #writting here 
-# basic_model.setObjective([(a*b) for a,b in zip(Interest_Rate,basic_model.getVars())]  - \
-#                         [(a*b) for a,b in zip(bad_debts,basic_model.getVars())]    ,GRB.MAXIMIZE)   
+basic_model.setObjective(gp.quicksum((a*b) for a,b in zip(obj_weights,basic_model.getVars())),GRB.MAXIMIZE)   
 
-basic_model.setObjective([(a*b) for a,b in zip(
-                                                df['diff'].tolist(),
-                                                [(a*b) for a,b in zip(Interest_Rate,basic_model.getVars())])]  - \
-                        [(a*b) for a,b in zip(bad_debts,basic_model.getVars())]    ,GRB.MAXIMIZE)   
+# basic_model.setObjective([(a*b) for a,b in zip(
+#                                                 df['diff'].tolist(),
+#                                                 [(a*b) for a,b in zip(Interest_Rate,basic_model.getVars())])]  - \
+#                         [(a*b) for a,b in zip(bad_debts,basic_model.getVars())]    ,GRB.MAXIMIZE)   
 
 #part 1 
 # part 2  - [(a*b) for a,b in zip(df['diff'].tolist(),[(a*b) for a,b in zip(Interest_Rate,basic_model.getVars())])]
@@ -45,9 +44,9 @@ basic_model.addConstr(gp.quicksum(basic_model.getVars()) <=10 ,"Bank Investment"
 
 """second constraint criteria Government and Agency bond must be invested atleast 4 millions"""
 indexes_of_dec_var=df[df['Type_of_Loan'].isin(["Farm","Commercial"])].index.tolist()
-basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in indexes_of_dec_var]) >= 
+basic_model.addConstr( gp.quicksum([basic_model.getVars()[x] for x in indexes_of_dec_var]) >=.3*
                       gp.quicksum(basic_model.getVars()) , \
-                      "Government and Agency Bond"  )
+                      "Farm and Commercial"  )
 
 
 """third constraint Home Loan"""
@@ -58,7 +57,7 @@ basic_model.addConstr(basic_model.getVars()[2]
 """fourth constraint Bad Debts"""
 bad_debts=df['Probability_of_Bad_Debt '].tolist()
 basic_model.addConstr(gp.quicksum((a*b) for a,b in zip(bad_debts,basic_model.getVars()))\
-                      <=.04*(gp.quicksum(basic_model.getVars())),"Years of maturity")
+                      <=.04*(gp.quicksum(basic_model.getVars())),"Bad Debts")
 
 """fifth constraint equality constraints"""
 basic_model.addConstrs(x >=0  for x in basic_model.getVars())
