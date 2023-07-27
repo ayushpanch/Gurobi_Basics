@@ -1,5 +1,11 @@
 import gurobipy as gp
 from gurobipy import GRB
+import pandas
+import os 
+
+# Reading the Excel file because now we will solve the same equation via data 
+df= pandas.read_csv(r"C:\Users\panch\Desktop\Gurobi\Practice_Problem_week_1_Excel\prob.csv")
+df.shape[0]
 
 
 #first step setting up the first model
