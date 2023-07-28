@@ -64,7 +64,7 @@ basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions])
 """fourth constraint """
 constraint=[x for x in Decision_variables_names if x.startswith("Mesa")]
 positions = [Decision_variables_names.index(every_decision_name) for every_decision_name in constraint]
-basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions]) ==225000 ,"Mesa Manufacturing plant")
+basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions]) ==275000 ,"Mesa Manufacturing plant")
 
 """fifth constraint """
 constraint=[x for x in Decision_variables_names if x.startswith("Scottsdale")]
