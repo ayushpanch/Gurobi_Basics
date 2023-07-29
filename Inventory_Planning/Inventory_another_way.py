@@ -3,9 +3,6 @@ from gurobipy import GRB
 import pandas
 import os 
 
-
-
-
 #first step setting up the first model
 basic_model=gp.Model("basic_model")
 print(basic_model)  
@@ -19,8 +16,6 @@ decision_vars = [basic_model.addVar(vtype=GRB.CONTINUOUS, name=every_month) for 
 basic_model.update()
 
 # third step setting up the objective functions 
-
-
  #writting here
 # 49*basic_model.getVars()[0] +45*basic_model.getVars()[1] + 46*basic_model.getVars()[2] + 47*basic_model.getVars()[3] +\
 # 1.5*(120  + basic_model.getVars()[0] -300)/2 +\
@@ -35,17 +30,17 @@ basic_model.update()
 
 basic_model.setObjective(49*basic_model.getVars()[0] +45*basic_model.getVars()[1] +\
                           46*basic_model.getVars()[2] + 47*basic_model.getVars()[3] +\
+#Inventory cost for month 1                          
 1.5*(120  + basic_model.getVars()[0] -300)/2 +\
+# Inventory cost for month 2 
       1.5*((basic_model.getVars()[0]-300) + (basic_model.getVars()[0] +basic_model.getVars()[1] -880 ))/2 +\
+# Inventory cost for month 3 
       1.5*((basic_model.getVars()[0] +basic_model.getVars()[1] -880) + \
            (basic_model.getVars()[0] +basic_model.getVars()[1] +basic_model.getVars()[2] -1190))/2 +\
+# Inventory cost for month 4
             1.5 * ((basic_model.getVars()[0] +basic_model.getVars()[1] +basic_model.getVars()[2] -1190 ) +\
              (basic_model.getVars()[0] + basic_model.getVars()[1] +basic_model.getVars()[2] +basic_model.getVars()[3] -1730))/2
 ,GRB.MINIMIZE)   
-
-# basic_model.setObjective(49*basic_model.getVars()[0] +45*basic_model.getVars()[1] +\
-#                           46*basic_model.getVars()[2] + 47*basic_model.getVars()[3] ,GRB.MINIMIZE)   
-
 
 
 # fourth step to add constraints 
@@ -88,10 +83,6 @@ basic_model.addConstr(50 <= basic_model.getVars()[0] + basic_model.getVars()[1] 
                       basic_model.getVars()[3] -1730, name="Lower_Bound_Constraint")
 basic_model.addConstr(basic_model.getVars()[0] + basic_model.getVars()[1] + basic_model.getVars()[2] +\
                       basic_model.getVars()[3] -1730 <= 130, name="Upper_Bound_Constraint")
-
-
-
-
 
 """writting the linear programming to understand what we have written is right or wrong """
 basic_model.write("Inventory.lp")
