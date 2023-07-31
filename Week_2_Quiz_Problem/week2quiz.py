@@ -8,7 +8,7 @@ basic_model=gp.Model("basic_model")
 print(basic_model)  
 
 
-months = ['C1'',C2','T1','T2','S1','S2','IC1','IT1','IC2','IT2']
+months = ['C1','C2','T1','T2','S1','S2','IC1','IT1','IC2','IT2']
 # Create decision variables with meaningful names using list comprehension
 decision_vars = [basic_model.addVar(vtype=GRB.CONTINUOUS, name=every_month) for every_month in months]
 
