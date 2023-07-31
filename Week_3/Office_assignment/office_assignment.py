@@ -45,9 +45,9 @@ basic_model.setObjective(gp.quicksum((a*b) for a,b in zip(weights,basic_model.ge
 """first constraint """
 constraint=[x for x in Decision_variables_names if x.endswith("Room_1")]
 positions = [Decision_variables_names.index(every_decision_name) for every_decision_name in constraint]
-# basic_model.addConstr(x >=0  for x in basic_model.getVars() ,"Room_1_2_staff_each")
-for every_positions in positions:
-    basic_model.addConstr(basic_model.getVars()[every_positions] == 2)
+basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions]) == 2 ,"Room_1_2_staff_each")
+# for every_positions in positions:
+#     basic_model.addConstr(basic_model.getVars()[every_positions] == 2)
 
 # basic_model.write("dummy.lp")
 
@@ -55,24 +55,29 @@ for every_positions in positions:
 """second constraint """
 constraint=[x for x in Decision_variables_names if x.endswith("Room_2")]
 positions = [Decision_variables_names.index(every_decision_name) for every_decision_name in constraint]
-# basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions]) == 2 ,"Room_2_2_staff_each")
-for every_positions in positions:
-    basic_model.addConstr(basic_model.getVars()[every_positions] == 2)
+basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions]) == 2 ,"Room_2_2_staff_each")
+# for every_positions in positions:
+#     basic_model.addConstr(basic_model.getVars()[every_positions] == 2)
 
 
 """third constraint"""
 constraint=[x for x in Decision_variables_names if x.endswith("Room_3")]
 positions = [Decision_variables_names.index(every_decision_name) for every_decision_name in constraint]
-# basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions]) == 2 ,"Room_3_2_staff_each")
-for every_positions in positions:
-    basic_model.addConstr(basic_model.getVars()[every_positions] == 2)
+basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions]) == 2 ,"Room_3_2_staff_each")
+# for every_positions in positions:
+#     basic_model.addConstr(basic_model.getVars()[every_positions] == 2)
 
 """fourth constraint """
 constraint=[x for x in Decision_variables_names if x.endswith("Room_4")]
 positions = [Decision_variables_names.index(every_decision_name) for every_decision_name in constraint]
-# basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions]) == 1 ,"Room_4_1_staff_each")
-for every_positions in positions:
-    basic_model.addConstr(basic_model.getVars()[every_positions] == 1)
+basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions]) == 1 ,"Room_4_1_staff_each")
+# for every_positions in positions:
+#     basic_model.addConstr(basic_model.getVars()[every_positions] == 1)
+
+"""fourth constraint """
+constraint=[x for x in Decision_variables_names if x.endswith("Room_5")]
+positions = [Decision_variables_names.index(every_decision_name) for every_decision_name in constraint]
+basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions]) == 1 ,"Room_5_1_staff_each")
 
 
 
@@ -85,9 +90,49 @@ for every_positions in positions:
 
 
 # """Sixth constraint """
-# constraint=[x for x in Decision_variables_names if x.startswith("Tuscon")]
-# positions = [Decision_variables_names.index(every_decision_name) for every_decision_name in constraint]
-# basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions]) ==300000 ,"Tuscon Manufacturing plant")
+constraint=[x for x in Decision_variables_names if x.startswith("Staff_1")]
+positions = [Decision_variables_names.index(every_decision_name) for every_decision_name in constraint]
+basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions]) == 1 ,"Staff 1 total")
+
+# """seventh constraint """
+constraint=[x for x in Decision_variables_names if x.startswith("Staff_2")]
+positions = [Decision_variables_names.index(every_decision_name) for every_decision_name in constraint]
+basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions]) == 1 ,"Staff 2 total")
+
+# """eighth constraint """
+constraint=[x for x in Decision_variables_names if x.startswith("Staff_3")]
+positions = [Decision_variables_names.index(every_decision_name) for every_decision_name in constraint]
+basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions]) == 1 ,"Staff 3 total")
+
+# """Ninth constraint """
+constraint=[x for x in Decision_variables_names if x.startswith("Staff_4")]
+positions = [Decision_variables_names.index(every_decision_name) for every_decision_name in constraint]
+basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions]) == 1 ,"Staff 4 total")
+
+# """Tenth constraint """
+constraint=[x for x in Decision_variables_names if x.startswith("Staff_5")]
+positions = [Decision_variables_names.index(every_decision_name) for every_decision_name in constraint]
+basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions]) == 1 ,"Staff 5 total")
+
+# """eleventh constraint """
+constraint=[x for x in Decision_variables_names if x.startswith("Staff_6")]
+positions = [Decision_variables_names.index(every_decision_name) for every_decision_name in constraint]
+basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions]) == 1 ,"Staff 6 total")
+
+# """twelvth constraint """
+constraint=[x for x in Decision_variables_names if x.startswith("Staff_7")]
+positions = [Decision_variables_names.index(every_decision_name) for every_decision_name in constraint]
+basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions]) == 1 ,"Staff 7 total")
+
+# """twelvth constraint """
+constraint=[x for x in Decision_variables_names if x.startswith("Staff_8")]
+positions = [Decision_variables_names.index(every_decision_name) for every_decision_name in constraint]
+basic_model.addConstr(gp.quicksum([basic_model.getVars()[x] for x in positions]) == 1 ,"Staff 8 total")
+
+
+
+
+
 
 # """seventh constraint equality constraints"""
 # basic_model.addConstrs(x >=0  for x in basic_model.getVars())
