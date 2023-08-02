@@ -1,9 +1,9 @@
 # Solution for model basic_model
-# Objective value = 53000
+# Objective value = 54800
 A 2
-B 6
-C 6
-D 5
-E 5
+B 5
+C 7
+D 4
+E 6
 F 0
 G 1

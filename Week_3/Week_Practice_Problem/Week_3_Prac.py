@@ -31,7 +31,7 @@ basic_model.setObjective((2200*(basic_model.getVars()[0] +
                        basic_model.getVars()[3] +
                        basic_model.getVars()[4]+
                        basic_model.getVars()[5])+
-                       200*basic_model.getVars()[6] )  ,GRB.MINIMIZE)   
+                       2000*basic_model.getVars()[6] )  ,GRB.MINIMIZE)   
 # Thursday is wrong
 # fourth step to add constraints 
 """first constraint """

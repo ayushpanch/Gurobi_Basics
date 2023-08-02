@@ -1,7 +1,7 @@
 \ Model basic_model
 \ LP format - for model browsing. Use MPS format to capture full model detail.
 Minimize
-  2200 A + 2200 B + 2200 C + 2200 D + 2200 E + 2200 F + 200 G
+  2200 A + 2200 B + 2200 C + 2200 D + 2200 E + 2200 F + 2000 G
 Subject To
  employees_coming_on_sunday: B + C + D + E + F >= 22
  employees_coming_on_monday: C + D + E + F + G >= 17
