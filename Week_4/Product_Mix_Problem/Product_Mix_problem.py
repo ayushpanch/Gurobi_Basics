@@ -2,7 +2,7 @@ import gurobipy as gp
 from gurobipy import GRB
 import pandas
 import os 
-from helper_functions import *
+
 # Reading the Excel file because now we will solve the same equation via data 
 # df= pandas.read_csv(r"C:\Users\panch\Desktop\Gurobi\Week_3\Staffing_Problem\staffing_problem.csv")
 # df.columns=[x.strip() for x in df.columns]
@@ -30,7 +30,7 @@ basic_model.setObjective(3*basic_model.getVars()[0] + 3*basic_model.getVars()[1]
                          +3*basic_model.getVars()[2]+3*basic_model.getVars()[3] \
                             + 3*basic_model.getVars()[4]  + 2*basic_model.getVars()[5] \
                             + 2*basic_model.getVars()[6] - 4*basic_model.getVars()[7] 
-                             +4*basic_model.getVars()[8] + 4*basic_model.getVars()[9] 
+                            - 4*basic_model.getVars()[8] - 4*basic_model.getVars()[9] 
                            ,GRB.MAXIMIZE)   
 
 # fourth step to add constraints 
@@ -39,9 +39,9 @@ basic_model.setObjective(3*basic_model.getVars()[0] + 3*basic_model.getVars()[1]
 
 basic_model.addConstr(basic_model.getVars()[3] <=20 , name = "D1 <=20" )
 basic_model.addConstr(basic_model.getVars()[4] <=20 , name = "E1 <=20" )
-basic_model.addConstr(basic_model.getVars()[7] <=120 , name = "M1 <=120" )
-basic_model.addConstr(basic_model.getVars()[8] <=120 , name = "M2 <=120" )
-basic_model.addConstr(basic_model.getVars()[9] <=120 , name = "M3 <=120" )
+basic_model.addConstr(basic_model.getVars()[7] <=128 , name = "M1 <=128" )
+basic_model.addConstr(basic_model.getVars()[8] <=128 , name = "M2 <=128" )
+basic_model.addConstr(basic_model.getVars()[9] <=128 , name = "M3 <=128" )
 
 basic_model.addConstr((12*basic_model.getVars()[0] +7*basic_model.getVars()[1] \
                       +8*basic_model.getVars()[2] + 10*(basic_model.getVars()[3] + basic_model.getVars()[5]) \
